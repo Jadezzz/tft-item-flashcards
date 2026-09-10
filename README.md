@@ -25,16 +25,24 @@ npm run preview
 
 ## GitHub Pages
 
-推送到 `main` 後，GitHub Actions（`.github/workflows/deploy.yml`）會自動建置並部署。
-
-首次啟用時請到 repo：
-
-**Settings → Pages → Build and deployment → Source = GitHub Actions**
+目前以 **`docs/`**（`npm run build` 產物）從 `main` 分支部署。
 
 線上網址：https://jadezzz.github.io/tft-item-flashcards/
 
+若要改為 Actions 部署：
+
+1. 將 `.github/workflows/deploy.yml` 加入 repo（需有 `workflow` OAuth scope 才能 push 工作流檔）
+2. Settings → Pages → Source = **GitHub Actions**
+3. 推送 `main` 後由 workflow 建置並部署（可刪除 `docs/`）
+
 Vite `base` 已設為 `/tft-item-flashcards/`。
+
+更新 `docs/` 靜態站：
+
+```bash
+npm run build && rm -rf docs && mkdir docs && cp -r dist/* docs/
+```
 
 ## 資料
 
-裝備資料：`src/data/items-18.2.json`（patch 18.2 關鍵被動摘要）。
+裝備資料：`src/data/items-18.2.json`（patch 18.2 關鍵被動摘要，36 組）。
